@@ -15,6 +15,55 @@ foreground_templates = [
   '{{if eq .Code 0}}magenta{{end}}',
 ]
 
+[[tooltips]]
+type = "git"
+tips = ["git", "g"]
+style = "diamond"
+foreground = "#193549"
+background = "#FFC300"
+leading_diamond = ""
+trailing_diamond = ""
+template = "{{ .HEAD }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}"
+
+[tooltips.properties]
+fetch_status = true
+fetch_upstream_icon = true
+
+[[tooltips]]
+type = "kubectl"
+tips = ["k", "kubectl"]
+style = "diamond"
+leading_diamond = ""
+trailing_diamond = ""
+background = '#326CE5'
+foreground = '#FFFFFF'
+template = '⎈ {{ .Context }}{{ if .Namespace }}:{{ .Namespace }}{{ end }}'
+
+[tooltips.properties]
+fetch_status = true
+fetch_upstream_icon = true
+
+[[tooltips]]
+type = "az"
+tips = ["az", "terraform"]
+style = "diamond"
+leading_diamond = ""
+trailing_diamond = ""
+foreground = "#193549"
+background = "#3CCBF4"
+# template = " {{ .Name }}"
+template = ' {{ .Name }}{{ if not (contains .EnvironmentName "AzureCloud") }} {{ .EnvironmentName }}{{ end }} '
+
+[[tooltips]]
+type = "aws"
+tips = ["aws"]
+style = "diamond"
+leading_diamond = ""
+trailing_diamond = ""
+foreground = "#000000"
+background = "#FF9900"
+template = "{{.Profile}}{{if .Region}}@{{.Region}}{{end}} "
+
 [[blocks]]
 type = 'prompt'
 alignment = 'left'
@@ -30,34 +79,6 @@ style = 'plain'
 [blocks.segments.properties]
 cache_duration = 'none'
 style = 'full'
-
-[[blocks.segments]]
-template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
-foreground = 'p:grey'
-background = 'transparent'
-type = 'git'
-style = 'powerline'
-
-[[blocks.segments]]
-background = 'transparent'
-foreground = 'white'
-type = 'kubectl'
-# template = ' (☸️ {{.Context}}{{if .Namespace}}- : {{.Namespace}}) {{else}}) {{end}}'
-template = ' (⎈ <red>{{ .Context }}</><cyan>{{ if .Namespace }}:{{ .Namespace }}{{ end }}</>) | '
-
-[[blocks.segments]]
-background = 'transparent'
-# foreground = '#9ec3f0'
-foreground = 'blue'
-style = 'powerline'
-type = 'az'
-template = '💠 {{ .Name }}{{ if not (contains .EnvironmentName "AzureCloud") }} {{ .EnvironmentName }}{{ end }}'
-
-[blocks.segments.properties]
-branch_icon = ''
-cache_duration = 'none'
-commit_icon = '@'
-fetch_status = true
 
 [[blocks]]
 type = 'rprompt'
