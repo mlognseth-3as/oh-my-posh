@@ -11,8 +11,8 @@ background = 'transparent'
 template = '❯ '
 background = 'transparent'
 foreground_templates = [
-    '{{if gt .Code 0}}red{{end}}',
-    '{{if eq .Code 0}}magenta{{end}}',
+  '{{if gt .Code 0}}red{{end}}',
+  '{{if eq .Code 0}}magenta{{end}}',
 ]
 
 [[blocks]]
@@ -43,7 +43,7 @@ background = 'transparent'
 foreground = 'white'
 type = 'kubectl'
 # template = ' (☸️ {{.Context}}{{if .Namespace}}- : {{.Namespace}}) {{else}}) {{end}}'
-template = ' (☸️ <blue>{{ .Context }}</><cyan>{{ if .Namespace }}:{{ .Namespace }}{{ end }}</>) | '
+template = ' (⎈ <red>{{ .Context }}</><cyan>{{ if .Namespace }}:{{ .Namespace }}{{ end }}</>) | '
 
 [[blocks.segments]]
 background = 'transparent'
@@ -85,8 +85,8 @@ background = 'transparent'
 type = 'text'
 style = 'plain'
 foreground_templates = [
-    '{{if gt .Code 0}}red{{end}}',
-    '{{if eq .Code 0}}magenta{{end}}',
+  '{{if gt .Code 0}}red{{end}}',
+  '{{if eq .Code 0}}magenta{{end}}',
 ]
 
 [blocks.segments.properties]
