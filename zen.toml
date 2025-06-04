@@ -1,0 +1,93 @@
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 3
+final_space = true
+
+[secondary_prompt]
+template = '❯❯ '
+foreground = 'magenta'
+background = 'transparent'
+
+[transient_prompt]
+template = '❯ '
+background = 'transparent'
+foreground_templates = [
+    '{{if gt .Code 0}}red{{end}}',
+    '{{if eq .Code 0}}magenta{{end}}',
+]
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+template = '{{ .Path }}'
+foreground = 'blue'
+background = 'transparent'
+type = 'path'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+style = 'full'
+
+[[blocks.segments]]
+template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+foreground = 'p:grey'
+background = 'transparent'
+type = 'git'
+style = 'powerline'
+
+[[blocks.segments]]
+background = 'transparent'
+foreground = 'white'
+type = 'kubectl'
+# template = ' (☸️ {{.Context}}{{if .Namespace}}- : {{.Namespace}}) {{else}}) {{end}}'
+template = ' (☸️ <blue>{{ .Context }}</><cyan>{{ if .Namespace }}:{{ .Namespace }}{{ end }}</>) | '
+
+[[blocks.segments]]
+background = 'transparent'
+# foreground = '#9ec3f0'
+foreground = 'blue'
+style = 'powerline'
+type = 'az'
+template = '💠 {{ .Name }}{{ if not (contains .EnvironmentName "AzureCloud") }} {{ .EnvironmentName }}{{ end }}'
+
+[blocks.segments.properties]
+branch_icon = ''
+cache_duration = 'none'
+commit_icon = '@'
+fetch_status = true
+
+[[blocks]]
+type = 'rprompt'
+overflow = 'hidden'
+
+[[blocks.segments]]
+template = '{{ .FormattedMs }}'
+foreground = 'yellow'
+background = 'transparent'
+type = 'executiontime'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+threshold = 5000
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+template = '❯'
+background = 'transparent'
+type = 'text'
+style = 'plain'
+foreground_templates = [
+    '{{if gt .Code 0}}red{{end}}',
+    '{{if eq .Code 0}}magenta{{end}}',
+]
+
+[blocks.segments.properties]
+cache_duration = 'none'
